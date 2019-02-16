@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+                <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+        <script type="text/javascript" src="patternLock/patternLock.min.js"></script>
+        <link href="patternLock/patternLock.css"  rel="stylesheet" type="text/css" />
+        <link href="lock.css"  rel="stylesheet" type="text/css" />
+        <title>
+            Phone OS
+        </title>
+        <style>
+            body {
+                overflow: hidden;
+                background: lightcyan;
+            }
+
+            * {
+                font-family: 'Open Sans';
+                user-select: none;
+            }
+
+            .phone {
+                background: white;
+                height: 700px;
+                width: 350px;
+                border-top: 50px solid black;
+                border-bottom: 50px solid black;
+                border-left: 10px solid black;
+                border-right: 10px solid black;
+                border-radius: 20px;
+                margin: 0px auto;
+                position: relative;
+            }
+
+            .nav-drawer {
+                position: absolute;
+                bottom: 20px;
+                left: 5%;
+                right: 5%;
+                background: white;
+                box-shadow: 0px 2px 10px gray;
+                width: 90%;
+                height: 50px;
+                transition: 0.3s;
+            }
+
+            .nav-drawer h1 {
+                margin: 0px;
+                text-align: center;
+            }
+
+            .time {
+                text-align: center;
+                margin-top: 50px;
+                font-size: 45px;
+                transition: 0.5s;
+            }
+
+            .time-top, .time-bottom {
+                margin: 0px;
+            }
+
+            .grid-container {
+                background: lightblue;
+                position: absolute;
+                width: 80%;
+                left: 10%;
+                right: 10%;
+                border-radius: 10px;
+                bottom: -500px;
+                transition: 0.3s;
+                opacity: 0;
+            }
+
+            .grid-item {
+                background: rgb(118, 198, 224);
+                border-radius: 10px;
+                font-size: 20px;
+                height: 50px;
+                text-align: center;
+                padding-top: 20px;
+            }
+
+            .grid-item:active {
+                background: rgb(87, 168, 223);
+            }
+
+            #lockscreen {
+                position: absolute;
+                background: white;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                transition: 0.5s;
+            }
+
+            #homescreen {
+                width: 100%;
+                height: 100%;
+                background: white;
+                left: 100%;
+                top: 0;
+                position: absolute;
+                transition: 0.5s;
+            }
+
+            #taskbar {
+                position: absolute;
+                bottom: 20px;
+                left: 5%;
+                width: 90%;
+                height: 50px;
+                background: white;
+                border-radius: 1000px;
+                transition: 0.5s;
+                box-shadow: 0px 2px 10px gray;
+                overflow: hidden;
+            }
+
+            .arrow-container {
+                width: 70px;
+                height: 95%;
+                margin: 0px auto;
+                background: transparent;
+                position: relative;
+            }
+
+            #arrow-1 {
+                width: 42px;
+                height: 3px;
+                position: absolute;
+                top: 20px;
+                transform: rotate(-45deg);
+                background: black;
+                transition: 0.5s;
+            }
+
+            #arrow-2 {
+                width: 42px;
+                height: 3px;
+                position: absolute;
+                top: 20px;
+                transform: rotate(45deg);
+                background: black;
+                right: 0px;
+                transition: 0.5s;
+            }
+
+            .grid-container-taskbar {
+                display: grid;
+                grid-template-columns: auto auto auto auto;
+                grid-template-rows: auto auto auto auto auto;
+                grid-gap: 10px 10px;
+                position: absolute;
+                top: 50px;
+                height: 90%;
+                width: 90%;
+                left: 5%;
+            }
+
+            .grid-item-taskbar {
+                text-align: center;
+                border-radius: 10px;
+                background: rgba(0, 0, 0, 0.151);
+            }
+        </style>
+        <script>
+            function locktoggle() {
+                var lock = document.getElementById("lock");
+                var passkey = document.getElementById("passkey");
+
+                if (lock.style.height == "50px") {
+                    lock.style.height = "90%";
+                    lock.style.bottom = "5%";
+
+                    passkey.style.opacity = "1";
+                    passkey.style.bottom = "200px";
+                } else {
+                    lock.style.height = "50px";
+                    lock.style.bottom = "20px";
+
+                    passkey.style.opacity = "0";
+                    passkey.style.bottom = "-500px";
+                }
+            }
+
+            function unlockPhone() {
+                var lockscreen = document.getElementById("lockscreen");
+                var homescreen = document.getElementById("homescreen");
+
+                lockscreen.style.left = "-100%";
+
+                homescreen.style.left = "0";
+            }
+            function openTaskbarMenu() {
+                var arrow1 = document.getElementById("arrow-1");
+                var arrow2 = document.getElementById("arrow-2");
+
+                var taskbar = document.getElementById("taskbar");
+
+                if (arrow1.style.transform == "rotate(-45deg)") {
+                    // if closed
+
+                    arrow1.style.transform = "rotate(-180deg)";
+                    arrow2.style.transform = "rotate(180deg)";
+
+                    taskbar.style.height = "90%";
+                    taskbar.style.borderRadius = "25px";
+                } else {
+                    arrow1.style.transform = "rotate(-45deg)";
+                    arrow2.style.transform = "rotate(45deg)";
+
+                    taskbar.style.height = "50px";
+                    taskbar.style.borderRadius = "1000px";
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", function() { display_pattern();});
+
+            function display_pattern()
+            {
+            var lock= new PatternLock('#pattern1',{
+            onDraw:function(pattern){
+            document.getElementById("pattern_val").value=lock.getPattern();
+            display_pattern2();
+            }
+            });
+            }
+
+            function hide_show_pattern()
+            {
+            if(document.getElementById("pattern_val").value!="")
+            {
+            document.getElementById("pattern1_container").style.display="none";
+            document.getElementById("pattern2_container").style.display="block";
+            }
+            else
+            {
+                document.getElementById("error_out").innerHTML = "Please Enter A pattern";
+            }
+            }
+
+            function display_pattern2()
+            {
+            var pattern_value=document.getElementById("pattern_val").value;
+            var lock= new PatternLock('#pattern2',{
+            onDraw:function(pattern)
+            {
+            lock.checkForPattern(pattern_value,function()
+            {
+            unlockPhone();
+            },
+            function()
+            {
+            document.getElementById("error_out").innerHTML = "Incorrect";
+            });
+            }
+            });
+            }
+        </script>
+    </head>
+    <body>
+        
+
+
+            <div id="lockscreen">
+                <div class="time">
+                    <p class="time-top">03</p>
+                    <p class="time-bottom">00</p>
+                </div>
+
+                <div class="nav-drawer" onclick="locktoggle()" id="lock">
+                    <h1>
+                        Enter Your Passkey
+                    </h1>
+                </div>
+                <div class="grid-container" id="passkey">
+                    <div id="wrapper">
+                        <span id="error_out"></span>
+                        <div id="pattern1_container" class="pattern_container">
+                         <p>Set Pattern Lock</p>
+                         <div id="pattern1">
+                         </div>
+                         <input type="button" value="Save Pattern Lock" onclick="hide_show_pattern();">
+                        </div>
+                       
+                        <div id="pattern2_container" class="pattern_container">
+                         <p>Check Pattern Lock</p>
+                         <div id="pattern2">
+                         </div>
+                        </div>
+                       
+                        <input type="hidden" value="" id="pattern_val">
+                       
+                       </div>
+                </div>
+            </div>
+
+            <div id="homescreen">
+                <div id="taskbar" onclick="openTaskbarMenu()">
+                    
+                    <div class="arrow-container">
+                        <div id="arrow-1"></div>
+                        <div id="arrow-2"></div>
+                    </div>
+                    <div class="grid-container-taskbar">
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                        <div class="grid-item-taskbar">APP</div>
+                    </div>
+                </div>
+            </div>
+            
+
+    </body>
+</html>

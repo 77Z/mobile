@@ -1,0 +1,32 @@
+<html>
+<head>
+ <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+ <script type="text/javascript" src="patternLock/patternLock.min.js"></script>
+ <link href="patternLock/patternLock.css"  rel="stylesheet" type="text/css" />
+ <link href="lock.css"  rel="stylesheet" type="text/css" />
+ <script type="text/javascript" src="lock.js"></script>
+</head>
+<body>
+<div id="wrapper">
+
+ <div id="pattern1_container" class="pattern_container">
+  <p>Set Pattern Lock</p>
+  <div id="pattern1">
+  </div>
+  <input type="button" value="Save Pattern Lock" onclick="hide_show_pattern();">
+ </div>
+
+ <div id="pattern2_container" class="pattern_container">
+  <p>Check Pattern Lock</p>
+  <div id="pattern2">
+  </div>
+ </div>
+
+ <input type="hidden" value="" id="pattern_val">
+
+</div>
+</body>
+</html>

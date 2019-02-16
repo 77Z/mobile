@@ -1,0 +1,45 @@
+body {
+ width: 100%;
+ margin: 0 auto;
+ padding: 0px;
+ font-family: sans-serif;
+ background-color:#ffffff;
+}
+#wrapper {
+ margin:0 auto;
+ padding:20px;
+ padding-bottom: 65px;
+ width:995px;
+ width: fit-content;
+}
+.pattern_container {
+ margin-top:20px;
+}
+.pattern_container p {
+ margin:0px;
+ color:rgb(0, 0, 0);
+ font-size:25px;
+ font-weight:bold;
+}
+#pattern1,#pattern2 {
+ margin-left:0px;
+ border-radius: 25px;
+}
+#pattern1_container input[type="button"] {
+ background:none;
+ border:none;
+ margin-top:10px;
+ color:rgb(0, 68, 255);
+ background: #eeeeee;
+ border-radius: 10px;
+ width: fit-content;
+ margin-left:-5px;
+ height:45px;
+ font-size:17px;
+ float: right;
+ font-weight: bold;
+ 
+}
+#pattern2_container {
+ display:none;
+}
